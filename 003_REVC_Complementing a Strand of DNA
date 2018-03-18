@@ -1,0 +1,12 @@
+'''
+Title: Complementing a Strand of DNA
+URL: http://rosalind.info/problems/revc/
+
+Given: A DNA string s
+Return: The reverse complement sc of s
+'''
+
+s = 'AAAACCCGGT'
+sc = s.translate(str.maketrans('ATCG', 'TAGC'))[::-1]
+
+print(sc)
