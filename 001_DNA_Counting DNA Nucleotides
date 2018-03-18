@@ -1,0 +1,12 @@
+'''
+Title: Counting DNA Nucleotides
+RUL: http://rosalind.info/problems/dna/
+
+Given: A DNA  string s
+Return: Four integers counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in s
+'''
+
+s = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'
+
+A, C, G, T = s.count('A'), s.count('C'), s.count('G'), s.count('T')
+print(A, C, G, T)
