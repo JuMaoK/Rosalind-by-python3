@@ -1,0 +1,39 @@
+import timeit
+'''
+Title: Rabbits and Recurrence Relations
+URL: http://rosalind.info/problems/fib/
+
+Given: Positive integers n<=40 and k<=5
+Return: The total number of rabbit pairs that will be present after n
+months, if we begin with 1 pair and in each generation, every pair of
+reproduction-age rabbits produces a litter of k rabbit pairs.
+'''
+
+n = 29
+k = 2
+
+def fib(n, k):
+    mature, immature = 0, 1
+    if n == 1:
+        # 1 immature in month 1 and 1 mature in month 2
+        return 1
+    # it works except first month
+    for i in range(n-1):
+        mature, immature = mature+immature, mature * k
+    return mature+immature
+tic = timeit.default_timer()
+print(fib(n, k))
+toc = timeit.default_timer()
+# 0.45
+print((toc - tic)*10000)
+
+
+def fib2(n):
+    if n ==1 or n == 2:
+        return 1
+    return k * fib2(n-2) + fib2(n-1)
+tic = timeit.default_timer()
+print(fib2(n))
+toc = timeit.default_timer()
+# 3000
+print((toc - tic)*10000)
