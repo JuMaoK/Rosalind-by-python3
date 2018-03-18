@@ -1,0 +1,12 @@
+'''
+Title: Transcribing DNA into RNA
+URL: http://rosalind.info/problems/rna/
+
+Given: A DNA string t
+Return: The transcribed RNA string of t
+'''
+
+t = 'GATGGAACTTGACTACGTAAATT'
+rna = t.replace('T', 'U')
+
+print(rna)
