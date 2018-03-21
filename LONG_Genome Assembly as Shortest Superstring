@@ -8,7 +8,7 @@ Return: A shortest superstring containing all the given strings (thus correspon
 ding to a reconstructed chromosome).
 '''
 
-with open(r'/Users/lancet/Downloads/rosalind_long-2.txt') as f:
+with open(r'rosalind_long-2.txt') as f:
     read_data = f.read().split('>')[1:]
 reads = [(i.replace('\n', '')[13:]) for i in read_data]
 half = len(reads[0])//2
