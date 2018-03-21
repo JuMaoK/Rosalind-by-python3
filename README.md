@@ -1,3 +1,9 @@
-DNA: Counting DNA Nucleotides \n
+DNA: Counting DNA Nucleotides
+
 RNA: Transcribing DNA into RNA
 
+FIB: Rabbits and Recurrence Relations
+
+REVC: Complementing a Strand of DNA
+
+LONG: Genome Assembly as Shortest Superstring
