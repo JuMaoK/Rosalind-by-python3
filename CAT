@@ -1,0 +1,41 @@
+'''
+Title: Catalan Numbers and RNA Secondary Structures
+URL: http://rosalind.info/problems/cat/
+
+Given: An RNA string s having the same number of occurrences of 'A' as 'U'
+and the same number of occurrences of 'C' as 'G'. The length of the string is at most 300 bp.
+Return: The total number of noncrossing perfect matchings of basepair edges
+in the bonding graph of s , modulo 1,000,000.
+
+Sample:
+>Rosalind_57
+AUAU
+Expect:
+2
+'''
+
+s = 'UCGAUCGACGUAUACGUAUGGCCAUUUUAAAUAUAUACCGAUCGGGGUUAAAGCGGGGCGCCCGCCAUUCGCGCGCGCAGCUCGCGCAGUAGCUGCCACGCGUUGCAGUAAAUAUCGGCUAUAAUGCGCGCCGCCGUAGCUAAUGUGUACUCGAAUAUAAUGCAUUCGAAUGCCGAUGCUAAUUAUUAAUAUACCGGAGCUUGAUCACUUAUAACGGAUUACCUGCGCGCGCUAAUACGGAUUAAUGC'
+
+def memo(func):
+    cache = {}
+    def wrapper(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+    return wrapper
+
+@memo
+def catalan(rna):
+    if rna.count('C') != rna.count('G') or rna.count('A') != rna.count('U'):
+        matches = 0
+        return matches
+    else:
+        if len(rna) == 0:
+            return 1
+        matches = 0
+        for i in range(1, len(rna), 2):
+            if rna[0]+rna[i] in ['AU', 'UA', 'CG', 'GC']:
+                matches += catalan(rna[1:i]) * catalan(rna[i+1:])
+        return matches
+
+print(catalan(s) % 10**6)
