@@ -1,0 +1,33 @@
+'''
+Title: Speeding Up Motif Finding
+URL: http://rosalind.info/problems/kmp/
+
+Given: A DNA string s (of length at most 100 kbp) in FASTA format.
+Return: The failure array of s.
+
+Sample:
+>Rosalind_87
+CAGCATGGTATCACAGCAGAG
+Expect:
+0 0 0 1 2 0 0 0 0 0 0 1 2 1 2 3 4 5 3 0 0
+
+Reference:
+http://jakeboxer.com/blog/2009/12/13/the-knuth-morris-pratt-algorithm-in-my-own-words/
+https://www.youtube.com/watch?v=GTJr8OvyEVQ
+'''
+
+s = 'CAGCATGGTATCACAGCAGAG'
+
+def kmp(s):
+    j = 0
+    failure_array = [0] * len(s)
+    for i in range(1, len(s)):
+        while j > 0 and s[j] != s[i]:
+            j = failure_array[j-1]
+        if s[j] == s[i]:
+            j += 1
+        failure_array[i] = j
+    return failure_array
+
+
+print(kmp(s))
