@@ -11,3 +11,5 @@ LONG: Genome Assembly as Shortest Superstring
 CAT: Catalan Numbers and RNA Secondary Structures
 
 LGIS: Longest Increasing Subsequence
+
+KMP: Speeding Up Motif Finding
