@@ -1,0 +1,42 @@
+'''
+Title: Creating a Distance Matrix
+URL: http://rosalind.info/problems/pdst/
+
+Given: A collection of n (n≤10) DNA strings s1,…,sn of equal
+length (at most 1 kbp). Strings are given in FASTA format.
+Return: The matrix D corresponding to the p-distance dp on
+the given strings. As always, note that your answer is allowed an absolute error of 0.001.
+
+Sample:
+>Rosalind_9499
+TTTCCATTTA
+>Rosalind_0942
+GATTCATTTC
+>Rosalind_6568
+TTTCCATTTT
+>Rosalind_1833
+GTTCCATTTA
+
+Exoect:
+0.00000 0.40000 0.10000 0.10000
+0.40000 0.00000 0.40000 0.30000
+0.10000 0.40000 0.00000 0.20000
+0.10000 0.30000 0.20000 0.00000
+'''
+
+with open(r'rosalind_pdst.txt') as f:
+    read_data = f.read().split('>')[1:]
+s = [i.replace('\n', '')[13:] for i in read_data]
+seq = [x for x in s]
+
+length = len(s[0])
+matrix = [[] for i in range(len(s))]
+
+for i in range(len(s)):
+    for j in range(i, len(s)):
+        hamming_distance = sum(a != b for a, b in zip(seq[i], seq[j])) / length
+        matrix[i].append(hamming_distance)
+        if i != j:
+            matrix[j].append(hamming_distance)
+
+print('\n'.join(' '.join('%.5f' % i for i in row) for row in matrix))
