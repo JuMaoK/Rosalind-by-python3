@@ -1,0 +1,86 @@
+'''
+Title: Error Correction in Reads
+URL: http://rosalind.info/problems/corr/
+
+Given: Given: A collection of up to 1000 reads of equal length (at most 50 bp) in FASTA format.
+Some of these reads were generated with a single-nucleotide error. For each read s in the dataset,
+one of the following applies:
+* s was correctly sequenced and appears in the dataset at least twice (possibly as a reverse complement);
+* s is incorrect, it appears in the dataset exactly once, and its Hamming distance is 1 with respect to
+  exactly one correct read in the dataset (or its reverse complement).
+
+Reutrn: A list of all corrections in the form "[old read]->[new read]". (Each correction must be a
+single symbol substitution, and you may return the corrections in any order.)
+
+Sample:
+>Rosalind_52
+TCATC
+>Rosalind_44
+TTCAT
+>Rosalind_68
+TCATC
+>Rosalind_28
+TGAAA
+>Rosalind_95
+GAGGA
+>Rosalind_66
+TTTCA
+>Rosalind_33
+ATCAA
+>Rosalind_21
+TTGAT
+>Rosalind_18
+TTTCC
+
+Expect:
+TTCAT->TTGAT
+GAGGA->GATGA
+TTTCC->TTTCA
+'''
+
+
+def re_comp(seq):
+    return seq.translate(str.maketrans('ATGC', 'TACG'))[::-1]
+
+def find_incorrects(seqs):
+    incorrects = []
+    for i in seqs:
+        if seqs.count(i) == 1 and re_comp(i) not in seqs:
+            incorrects.append(i)
+    return incorrects
+
+def find_corrects(incorrect, seq):
+    hamm_dist = 0
+    for i, j in zip(incorrect, seq):
+        if i != j:
+            hamm_dist += 1
+            if hamm_dist > 2:
+                return False
+    if hamm_dist == 1:
+        return True
+
+def result(seqs):
+    res = {}
+    incorrects = find_incorrects(seqs)
+    for i in incorrects:
+        for j in (set(seqs) - set(incorrects)):
+            if find_corrects(i, j):
+                res[i] = j
+                break
+            elif find_corrects(i, re_comp(j)):
+                res[i] = re_comp(j)
+                break
+    return res
+
+def main():
+    with open(r'/Users/lancet/Downloads/rosalind_corr.txt') as f:
+        read_data = f.read().splitlines()
+    seqs = [s for s in read_data[1::2]]
+    res = result(seqs)
+    for i in res:
+        print(i+'->'+res[i], end='\n')
+
+
+if __name__ == '__main__':
+    main()
+
