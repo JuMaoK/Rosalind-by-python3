@@ -39,19 +39,19 @@ TTTCC->TTTCA
 '''
 
 
-def re_comp(seq):
-    return seq.translate(str.maketrans('ATGC', 'TACG'))[::-1]
+def re_comp(read):
+    return read.translate(str.maketrans('ATGC', 'TACG'))[::-1]
 
-def find_incorrects(seqs):
+def find_incorrects(reads):
     incorrects = []
-    for i in seqs:
-        if seqs.count(i) == 1 and re_comp(i) not in seqs:
+    for i in reads:
+        if reads.count(i) == 1 and re_comp(i) not in reads:
             incorrects.append(i)
     return incorrects
 
-def find_corrects(incorrect, seq):
+def find_corrects(incorrect, read):
     hamm_dist = 0
-    for i, j in zip(incorrect, seq):
+    for i, j in zip(incorrect, read):
         if i != j:
             hamm_dist += 1
             if hamm_dist > 2:
@@ -59,11 +59,11 @@ def find_corrects(incorrect, seq):
     if hamm_dist == 1:
         return True
 
-def result(seqs):
+def result(reads):
     res = {}
-    incorrects = find_incorrects(seqs)
+    incorrects = find_incorrects(reads)
     for i in incorrects:
-        for j in (set(seqs) - set(incorrects)):
+        for j in (set(reads) - set(incorrects)):
             if find_corrects(i, j):
                 res[i] = j
                 break
@@ -75,8 +75,8 @@ def result(seqs):
 def main():
     with open(r'/Users/lancet/Downloads/rosalind_corr.txt') as f:
         read_data = f.read().splitlines()
-    seqs = [s for s in read_data[1::2]]
-    res = result(seqs)
+    reads = [s for s in read_data[1::2]]
+    res = result(reads)
     for i in res:
         print(i+'->'+res[i], end='\n')
 
