@@ -17,3 +17,5 @@ KMP: Speeding Up Motif Finding
 PDST: Creating a Distance Matrix
 
 REAR: Reversal Distance
+
+CORR: Error Correction in Reads
