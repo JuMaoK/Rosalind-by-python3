@@ -19,3 +19,5 @@ PDST: Creating a Distance Matrix
 REAR: Reversal Distance
 
 CORR: Error Correction in Reads
+
+KMER: k-Mer Composition
