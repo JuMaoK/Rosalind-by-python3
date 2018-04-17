@@ -26,10 +26,7 @@ from itertools import product
 from collections import Counter
 
 with open(r'/Users/lancet/Downloads/rosalind_kmer.txt') as f:
-    read_data = f.read().splitlines()[1:]
-string = ''
-for i in read_data:
-    string += i
+    string = ''.join(f.read().split('\n')[1:])
 
 def kmerComposition(string, k):
     array = [''.join(i) for i in product('ACGT', repeat=4)]
