@@ -21,3 +21,5 @@ REAR: Reversal Distance
 CORR: Error Correction in Reads
 
 KMER: k-Mer Composition
+
+GREP: Genome Assembly with Perfect Coverage and Repeats
