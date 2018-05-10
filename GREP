@@ -1,0 +1,40 @@
+'''
+Title: Genome Assembly with Perfect Coverage and Repeats
+URL: http://rosalind.info/problems/grep/
+
+Given: A list Sk+1 of error-free DNA (k+1)-mers (k≤5) taken
+from the same strand of a circular chromosome (of length ≤50).
+Return: All circular strings assembled by complete cycles in
+the de Bruijn graph Bk of Sk+1. The strings may be given in
+# any order, but each one should begin with the first (k+1)-mer
+p rovided in the input.
+'''
+
+
+
+def DeBruijn_graph(strings, k):
+    return [(i[:k], i[-k:]) for i in strings]
+
+def Assemble(string, edges, k):
+    add_list = [index for index, item in enumerate(edges) if item[0] == string[-k:]]
+    if add_list:
+        return [Assemble(string + edges[i][1][-1], edges[:i] + edges[i+1:], k) for i in add_list]
+    else:
+        return string if edges == [] else []
+
+
+def flatten(lst):
+    for element in lst:
+        if isinstance(element, list):
+            for subelement in flatten(element):
+                yield subelement
+        else:
+            yield element
+
+with open('rosalind_grep.txt') as f:
+    read_data = f.read().splitlines()
+
+k = len(read_data[0])-1
+db_edge = DeBruijn_graph(read_data[1:], k)
+circular_strings = [circular[:len(read_data)] for circular in set(flatten(Assemble(read_data[0], db_edge, k)))]
+print('\n'.join(circular_strings))
