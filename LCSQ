@@ -1,0 +1,34 @@
+'''
+Title: Finding a Shared Spliced Motif
+URL: http://rosalind.info/problems/lcsq/
+
+Given: Two DNA strings s and t (each having length at most 1 kbp) in FASTA format.
+Return: A longest common subsequence of s and t. (If more than one solution exists, you may return any one.)
+
+Reference:
+https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
+'''
+
+
+# lcs: longest common string
+def lcs(a, b):
+    matrix = [[0 for j in range(len(b)+1)] for i in range(len(a)+1)]
+    for i, x in enumerate(a):
+        for j, y in enumerate(b):
+            if x == y:
+                matrix[i+1][j+1] = matrix[i][j] + 1
+            else:
+                matrix[i+1][j+1] = max(matrix[i][j+1], matrix[i+1][j])
+    lcstring = ''
+    row, col = len(a), len(b)
+    while row>0 and col>0:
+        if matrix[row][col] == matrix[row-1][col]:
+            row -= 1
+        elif matrix[row][col] == matrix[row][col-1]:
+            col -= 1
+        else:
+            assert a[row-1] == b[col-1]
+            lcstring = a[row-1] + lcstring
+            row -= 1
+            col -= 1
+    return lcstring
