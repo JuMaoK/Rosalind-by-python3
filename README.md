@@ -23,3 +23,5 @@ CORR: Error Correction in Reads
 KMER: k-Mer Composition
 
 GREP: Genome Assembly with Perfect Coverage and Repeats
+
+LCSQ: Finding a Shared Spliced Motif
