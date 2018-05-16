@@ -27,3 +27,5 @@ GREP: Genome Assembly with Perfect Coverage and Repeats
 LCSQ: Finding a Shared Spliced Motif
 
 MOTZ: Motzkin Numbers and RNA Secondary Structures
+
+SCSP: Interleaving Two Motifs
