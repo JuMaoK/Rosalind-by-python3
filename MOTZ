@@ -1,0 +1,36 @@
+'''
+Title: Motzkin Numbers and RNA Secondary Structures
+URL: http://rosalind.info/problems/motz/
+
+Given: An RNA string s of length at most 300 bp.
+
+Return: The total number of noncrossing matchings
+of basepair edges in the bonding graph of s, modulo 1,000,000.
+'''
+
+s = '''CCCAUGCGUGGUGCAGAGACUGUAUCCUGAUCUAACUCUGGUUUGGUUGAGAGACAUAGU
+GACUGUCAGCUCCCUGCCGUCAGGGUGUAUAGUCCAGAGGCGACGAUGAUUAGUACCAGU
+UAGGCAUAUCGACACCUUAAUUUCGUGACUGUUUGACACCACCACUACUGACAUAAACGG
+UAUGCUCGAUCUAAAAAGAGAGGUCAUGCUAAGUUACGACGGCCGCCAAUGUUCAGGUCC
+CAGUUUGGCUAUAGUUGGCGCAUCGCUCGAUAGGAC'''.strip().replace('\n', '')
+
+
+def memo(func):
+    cache = {}
+    def wrapper(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+    return wrapper
+
+@memo
+def motz(rna):
+    if len(rna) <= 1:
+        return 1
+    else:
+        match = motz(rna[1:]) + sum([motz(rna[1:i]) * motz(rna[1+i:])
+                                     for i in range(1, len(rna))
+                                     if rna[0] + rna[i] in ['AU', 'UA', 'CG', 'GC']])
+    return match
+
+print(motz(s) % 10**6)
