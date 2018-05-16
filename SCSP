@@ -1,0 +1,35 @@
+'''
+Title: Interleaving Two Motifs
+URL: http://rosalind.info/problems/scsp/
+
+Given: Two DNA strings s and t.
+Return: A shortest common supersequence of s and t.
+If multiple solutions exist, you may output any one.
+'''
+
+
+from LCSQ import lcs
+
+s, t = '''ATCTGAT
+TGCATA'''.splitlines()
+
+def scs(s, t):
+    '''longest common subsequence'''
+    lcstring = lcs(s, t)
+    scstring = [''] * (len(lcstring)+1)
+    m = 0
+    n = 0
+    for i in range(len(lcstring)):
+        while s[m] != lcstring[i] and m < len(s):
+            scstring[i] += s[m]
+            m += 1
+        while t[n] != lcstring[i] and n < len(t):
+            scstring[i] += t[n]
+            n += 1
+        scstring[i] += lcstring[i]
+        m += 1
+        n += 1
+
+    scstring[-1] = s[m:] + t[n:]
+
+    return ''.join(scstring)
