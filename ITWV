@@ -1,0 +1,36 @@
+'''
+Title: Finding Disjoint Motifs in a Gene
+URL: http://rosalind.info/problems/itwv/
+
+Given: A text DNA string s of length at most 10 kbp, followed
+by a collection of n (n≤10) DNA strings of length at most 10 bp acting as patterns.
+
+Return: An n×n matrix M for which Mj,k=1 if the j th and k th
+pattern strings can be interwoven into s and Mj,k=0 otherwise.
+'''
+
+from itertools import combinations_with_replacement
+
+def is_supersequence(s1, s2, candidate):
+    if len(candidate) == 0:
+        return True
+    elif s1[0] == s2[0] == candidate[0]:
+        return is_supersequence(s1[1:], s2, candidate[1:]) or is_supersequence(s1, s2[1:], candidate[1:])
+    elif s1[0] == candidate[0]:
+        return is_supersequence(s1[1:], s2, candidate[1:])
+    elif s2[0] == candidate[0]:
+        return is_supersequence(s1, s2[1:], candidate[1:])
+    else:
+        return False
+
+def itwv(string, patterns):
+    matrix = [[0 for j in range(len(patterns))] for i in range(len(patterns))]
+    for i in list(combinations_with_replacement(range(len(patterns)), 2)):
+        s1 = patterns[i[0]]
+        s2 = patterns[i[1]]
+        for j in range(len(string) - len(s1) - len(s2) + 1):
+            if is_supersequence(s1+'e', s2+'e', string[j:j+len(s1)+len(s2)]):
+                matrix[i[0]][i[1]] = 1
+                matrix[i[1]][i[0]] = 1
+                break
+    return matrix
