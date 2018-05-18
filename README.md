@@ -31,3 +31,5 @@ MOTZ: Motzkin Numbers and RNA Secondary Structures
 SCSP: Interleaving Two Motifs
 
 ITWV: Finding Disjoint Motifs in a Gene
+
+EDIT: Edit Distance
