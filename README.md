@@ -33,3 +33,5 @@ SCSP: Interleaving Two Motifs
 ITWV: Finding Disjoint Motifs in a Gene
 
 EDIT: Edit Distance
+
+ASPC: Introduction to Alternative Splicing
