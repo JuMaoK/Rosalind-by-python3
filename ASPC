@@ -1,0 +1,31 @@
+'''
+Title: Introduction to Alternative Splicing
+http://rosalind.info/problems/aspc/
+
+Given: Positive integers n and m with 0≤m≤n≤2000.
+
+Return: The sum of combinations C(n,k) for all k
+satisfying m≤k≤n, modulo 1,000,000. In shorthand, ∑nk=m(nk).
+'''
+
+n = 1978
+m = 942
+
+def range_prod(lo, hi):
+    if lo + 1 < hi:
+        mid = (lo+hi)//2
+        return range_prod(lo, mid) * range_prod(mid+1, hi)
+    if lo == hi:
+        return lo
+    return lo * hi
+
+def factorial_bignumber(n):
+    if n < 2:
+        return 1
+    else: return range_prod(1, n)
+
+co = 0
+for k in range(m, n+1):
+    co += factorial_bignumber(n) // (factorial_bignumber(k) * factorial_bignumber(n-k))
+
+print(co % 1000000)
