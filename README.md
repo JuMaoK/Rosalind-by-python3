@@ -35,3 +35,5 @@ ITWV: Finding Disjoint Motifs in a Gene
 EDIT: Edit Distance
 
 ASPC: Introduction to Alternative Splicing
+
+NKEW: Newick Format with Edge Weights
