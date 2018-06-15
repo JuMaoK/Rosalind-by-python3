@@ -37,3 +37,5 @@ EDIT: Edit Distance
 ASPC: Introduction to Alternative Splicing
 
 NKEW: Newick Format with Edge Weights
+
+INDC: Independent Segregation of Chromosomes
