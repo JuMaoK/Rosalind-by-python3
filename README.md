@@ -38,6 +38,8 @@ ASPC: Introduction to Alternative Splicing
 
 NKEW: Newick Format with Edge Weights
 
+CONV: Comparing Spectra with the Spectral Convolution
+
 LGIS: Longest Increasing Subsequence
 
 INDC: Independent Segregation of Chromosomes
