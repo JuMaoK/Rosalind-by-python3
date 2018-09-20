@@ -1,4 +1,3 @@
-```python
 '''
 Title: Comparing Spectra with the Spectral Convolution
 URL: http://rosalind.info/problems/conv/
@@ -23,7 +22,6 @@ def Minkowski_diff(s1, s2):
 
 print(Minkowski_diff(s1, s2))
 
-```
 
 
 
