@@ -1,5 +1,4 @@
-```
-
+```python
 '''
 Title: Comparing Spectra with the Spectral Convolution
 URL: http://rosalind.info/problems/conv/
@@ -23,7 +22,6 @@ def Minkowski_diff(s1, s2):
     return Counter([round(i - j, 5) for i in s1 for j in s2]).most_common(1)
 
 print(Minkowski_diff(s1, s2))
-
 
 ```
 
