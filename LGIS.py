@@ -11,9 +11,8 @@ https://stackoverflow.com/questions/3992697/longest-increasing-subsequence
 '''
 
 with open(r'rosalind_lgis.txt') as f:
-    read_data = f.read().split()
-    n = int(read_data[0])
-    pai = list(map(int, read_data[1:]))
+    n = int(f.readline())
+    pai = [int(i) for i in f.readline().split()]
 
 def longest_increasing_subsequence(X):
     """Returns the Longest Increasing Subsequence in the Given List/Array"""
