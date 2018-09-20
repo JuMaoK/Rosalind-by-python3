@@ -38,6 +38,8 @@ ASPC: Introduction to Alternative Splicing
 
 NKEW: Newick Format with Edge Weights
 
+LGIS: Longest Increasing Subsequence
+
 INDC: Independent Segregation of Chromosomes
 
 SEXL: Sex-Linked Inheritance
